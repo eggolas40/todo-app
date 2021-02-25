@@ -1,0 +1,16 @@
+{
+  "todoItems": [
+    {
+      "name": "Get shopping",
+      "complete": false
+    },
+    {
+      "name": "Pay bills",
+      "complete": false
+    },
+    {
+      "name": "Feed dog",
+      "complete": false
+    }
+  ]
+}
