@@ -1,5 +1,7 @@
+import {Header} from './Header.style'
+
 export default () => {
   return (
-    <h1>TODO app</h1>
+    <Header>Things to do today</Header>
   )
 }

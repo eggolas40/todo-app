@@ -6,7 +6,7 @@ import TodoStore from  '../../store/todoStore'
 
 import TodoItem from '../TodoItem'
 
-import { Div, Button } from './TodoList.style'
+import { Div, Button, Input, List } from './TodoList.style'
 
 const todoStore = new TodoStore()
 
@@ -22,13 +22,13 @@ const TodoList: React.FC<{}> = observer(() => {
   const inputEl = React.useRef<HTMLInputElement>(null);
   return (
     <Div>
-      <input type='text' ref={inputEl} />
+      <Input type='text' ref={inputEl} />
       <Button onClick={() => handleAddNewTodo(inputEl)}>Add</Button>
-      <ul>
+      <List>
         {todoStore.todos.map(d => {
           return <TodoItem name={d.name} complete={d.complete} key={uuid.v4()} handleRemoveTodo={handleRemoveTodo} />
         })}
-      </ul>
+      </List>
     </Div>
   )
 })
