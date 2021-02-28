@@ -19,12 +19,9 @@ class TodoStore {
     this.todos = todos
   }
 
-  removeTodo = (todo: TodoType) => {
-  console.log('# ~ find this todo', todo)
-  console.log('# ~ before ', this.todos)
-    const todos = this.todos.slice().filter(t => t.name !== todo.name)
+  removeTodo = (id: TodoType['id']) => {
+    const todos = this.todos.slice().filter(t => t.id !== id)
     this.todos = todos
-    console.log('# ~ after ', this.todos)
   }
 }
 export default TodoStore
