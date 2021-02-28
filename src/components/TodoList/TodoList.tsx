@@ -10,23 +10,26 @@ import { Div, Button, Input, List } from './TodoList.style'
 
 const todoStore = new TodoStore()
 
-const handleAddNewTodo = (input: any): void => {
-  todoStore.addTodo({ name: input.current.value, complete: false })
+const handleAddNewTodo = (input: any, e?: any, ): void => {
+  if ((!e || e.key === 'Enter') && input?.current?.value) {
+    todoStore.addTodo({ name: input.current.value, complete: false, id: uuid.v4() })
+    input.current.value = ''
+  }
 }
 
-const handleRemoveTodo = (input: any): void => {
-  todoStore.removeTodo({ name: input.current.innerText, complete: false })
+const handleRemoveTodo = (id: any): void => {
+  todoStore.removeTodo(id)
 }
 
 const TodoList: React.FC<{}> = observer(() => {
   const inputEl = React.useRef<HTMLInputElement>(null);
   return (
     <Div>
-      <Input type='text' ref={inputEl} />
+      <Input type='text' ref={inputEl} onKeyPress={(e: React.KeyboardEvent<HTMLDivElement>) => handleAddNewTodo(inputEl, e)} />
       <Button onClick={() => handleAddNewTodo(inputEl)}>Add</Button>
       <List>
-        {todoStore.todos.map(d => {
-          return <TodoItem name={d.name} complete={d.complete} key={uuid.v4()} handleRemoveTodo={handleRemoveTodo} />
+        {todoStore?.todos.map(d => {
+          return <TodoItem name={d.name} complete={d.complete} id={d.id} handleRemoveTodo={handleRemoveTodo} />
         })}
       </List>
     </Div>
